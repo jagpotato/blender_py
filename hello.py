@@ -40,7 +40,10 @@ def add_text(text) :
 
   bpy.data.fonts.load(env.FONT_PATH)
   ob.data.font = bpy.data.fonts.get('Meiryo')
-  # print(bpy.data.fonts[1])
+  # ob.data.font = bpy.data.fonts.get('HGSoeiKakupoptai')
+  # ob.data.font = bpy.data.fonts.get('TogetogeRock-B')
+  # ob.data.font = bpy.data.fonts.get('PopRumCute')
+  print(bpy.data.fonts[1])
 
 def export_object(path = env.OUTPUT_PATH):
   bpy.ops.export_scene.fbx(
@@ -55,5 +58,5 @@ def export_object(path = env.OUTPUT_PATH):
 if __name__ == "__main__":
   delete_all()
   # add_cone()
-  add_text('漢字')
-  # export_object()
+  add_text('メ')
+  export_object()
