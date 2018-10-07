@@ -3,6 +3,8 @@ import math
 import sys
 sys.path.append('.')
 import env
+import os
+import shutil
 
 ROT_QUATER = math.pi / 2
 
@@ -45,9 +47,9 @@ def add_text(text) :
   # ob.data.font = bpy.data.fonts.get('PopRumCute')
   print(bpy.data.fonts[1])
 
-def export_object(path = env.OUTPUT_PATH):
+def export_object(name, path = env.OUTPUT_PATH):
   bpy.ops.export_scene.fbx(
-    filepath = path,
+    filepath = path + '\\' + name + '.fbx',
     version = 'BIN7400',
     ui_tab = 'GEOMETRY',
     use_mesh_modifiers = True,
@@ -55,8 +57,23 @@ def export_object(path = env.OUTPUT_PATH):
     mesh_smooth_type = 'OFF'
   )
 
+def get_character(path = env.TEXT_PATH):
+  file = open(path, 'r', encoding='utf-8')
+  line = file.read()
+  string = line.split()
+  character = []
+  for s in string:
+    for c in s:
+      character.append(c)
+  return character
+
 if __name__ == "__main__":
   delete_all()
-  # add_cone()
-  add_text('メ')
-  export_object()
+  character = get_character()
+  if os.path.exists(env.OUTPUT_PATH):
+    shutil.rmtree(env.OUTPUT_PATH)
+  os.mkdir(env.OUTPUT_PATH)
+  for c in character:
+    add_text(c)
+    export_object(str(ord(c)))
+    delete_all()
