@@ -5,6 +5,7 @@ sys.path.append('.')
 import env
 import os
 import shutil
+import re
 
 ROT_QUATER = math.pi / 2
 
@@ -67,12 +68,26 @@ def get_character(path = env.TEXT_PATH):
       character.append(c)
   return character
 
+# def read_timetag(path = env.TEXT_PATH):
+#   file = open(path, 'r', encoding='utf-8')
+#   line = file.read()
+#   string = line.split()
+#   print(re.split('[\[\]]', string[1]))
+#   # character = []
+#   # for s in string:
+#   #   for c in s:
+#   #     character.append(c)
+
 if __name__ == "__main__":
   delete_all()
+  # 歌詞ファイルから文字配列を取得
   character = get_character()
+  # read_timetag()
+
   if os.path.exists(env.OUTPUT_PATH):
     shutil.rmtree(env.OUTPUT_PATH)
   os.mkdir(env.OUTPUT_PATH)
+
   for c in character:
     add_text(c)
     export_object(str(ord(c)))
